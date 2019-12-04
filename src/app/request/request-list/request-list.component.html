@@ -1,0 +1,29 @@
+<mat-accordion class="headers-align">
+    <mat-expansion-panel *ngFor="let request of requests" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{request.id}} {{request.from}}
+            </mat-panel-title>
+            <mat-panel-description [ngSwitch]="request.status">
+                <span>{{request.unit}}</span>
+                <span>{{request.createdAt | date: 'dd/MM/yyyy'}}</span>
+                <span>{{request.classification}}</span>
+                <mat-icon *ngSwitchCase="'APPROVED'">check</mat-icon>
+                <mat-icon *ngSwitchCase="'DENIED'">clear</mat-icon>
+                <mat-icon *ngSwitchCase="'PENDING'">access_time</mat-icon>
+                <mat-icon *ngSwitchCase="'WAITING_FOR_INFO'">info</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+            <mat-form-field *ngIf="request.info" class="disabled">
+                <mat-label>תיאור הבקשה</mat-label>
+                <input matInput disabled [value]="request.info">
+            </mat-form-field>
+        </div>
+        <mat-action-row align="end" *ngIf="request.status !== 'APPROVED' && request.status !== 'DENIED'">
+            <button mat-button (click)="approveRequest(request.id)" color="primary">אשר</button>
+            <button mat-button (click)="denyRequest(request.id)" color="warn">דחה</button>
+            <button mat-button >פרטים נוספים</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>
