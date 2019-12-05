@@ -11,11 +11,17 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
+    FormsModule,
     MatToolbarModule,
     MatExpansionModule,
     MatIconModule,
@@ -26,9 +32,13 @@ import { MatSelectModule } from '@angular/material/select';
     MatSnackBarModule,
     MatListModule,
     MatCardModule,
-    MatSelectModule
+    MatSelectModule,
+    MatStepperModule,
+    MatChipsModule,
+    MatAutocompleteModule,
   ],
   exports: [
+    FormsModule,
     MatToolbarModule,
     MatExpansionModule,
     MatIconModule,
@@ -39,7 +49,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatSnackBarModule,
     MatListModule,
     MatCardModule,
-    MatSelectModule
+    MatSelectModule,
+    MatStepperModule,
+    MatChipsModule,
+    MatAutocompleteModule,
   ]
 })
 export class SharedModule { }
