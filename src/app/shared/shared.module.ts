@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { FormsModule } from '@angular/forms';
 
@@ -36,6 +37,7 @@ import { FormsModule } from '@angular/forms';
     MatStepperModule,
     MatChipsModule,
     MatAutocompleteModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     FormsModule,
@@ -53,6 +55,7 @@ import { FormsModule } from '@angular/forms';
     MatStepperModule,
     MatChipsModule,
     MatAutocompleteModule,
+    MatProgressSpinnerModule,
   ]
 })
 export class SharedModule { }

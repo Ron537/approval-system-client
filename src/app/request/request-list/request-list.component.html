@@ -38,5 +38,6 @@
     </mat-accordion>
 </div>
 <ng-template #noRequests>
-    <span>לא נמצאו בקשות מתאימות</span>
+    <mat-spinner class="center" *ngIf="!requests" diameter="25"></mat-spinner>
+    <span *ngIf="requests">לא נמצאו בקשות מתאימות</span>
 </ng-template>
