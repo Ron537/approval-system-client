@@ -17,4 +17,10 @@ export class UnitService {
   getRanks(): Observable<string[]> {
     return this.http.get<string[]>('/api/v1/ranks');
   }
+
+  setApprovalRanks(unitId: string, ranks: string[]) {
+    return this.http.patch(`/api/v1/unit/${unitId}/approvers`, {
+      ranks
+    });
+  }
 }

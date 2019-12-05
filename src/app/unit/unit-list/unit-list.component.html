@@ -4,8 +4,14 @@
             <h4 mat-line>{{unit.name}}</h4>
             <mat-form-field>
                 <mat-label>דרגות מאשרות</mat-label>
-                <mat-select multiple>
-                    <mat-option *ngFor="let rank of ranks" [value]="rank">{{rank}}</mat-option>
+                <mat-select multiple (selectionChange)="ranksChanged($event, unit.id)" [(ngModel)]="unit.approvers">
+                    <mat-select-trigger>
+                        {{unit.approvers ? unit.approvers[0] : ''}}
+                        <span *ngIf="unit.approvers?.length > 1" class="additional-selection">
+                            (+{{unit.approvers.length - 1}} {{unit.approvers?.length === 2 ? 'נוסף' : 'נוספים'}})
+                        </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let rank of ranks" [value]="rank" check="true">{{rank}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </mat-list-item>
