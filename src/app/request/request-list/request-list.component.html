@@ -48,9 +48,9 @@
                 </dl>
             </div>
             <mat-action-row align="end" *ngIf="approvable && request.status !== 'APPROVED' && request.status !== 'DENIED'">
+                <button mat-button (click)="requestAdditionalData(request.id)">פרטים נוספים</button>
                 <button mat-button (click)="approveRequest(request.id)" color="primary">אשר</button>
                 <button mat-button (click)="denyRequest(request.id)" color="warn">דחה</button>
-                <button mat-button>פרטים נוספים</button>
             </mat-action-row>
         </mat-expansion-panel>
     </mat-accordion>

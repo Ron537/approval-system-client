@@ -47,18 +47,21 @@ export class UnitListComponent implements OnInit {
       data: {
         id: unitId
       },
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe((users: { id: string, name: string }[]) => {
-      this.unitService.setSpecialApprovers(unitId, users.map(usr => usr.id)).subscribe(() => {
-        this.snackBar.open('משתמשים נוספו בהצלחה', 'אישור', {
-          duration: 3 * 1000,
+      if (users) {
+        this.unitService.setSpecialApprovers(unitId, users.map(usr => usr.id)).subscribe(() => {
+          this.snackBar.open('משתמשים נוספו בהצלחה', 'אישור', {
+            duration: 3 * 1000,
+          });
+        }, () => {
+          this.snackBar.open('הוספת משתמשים נכשל. נסה שוב מאוחר יותר', 'אישור', {
+            duration: 5 * 1000,
+          });
         });
-      }, () => {
-        this.snackBar.open('הוספת משתמשים נכשל. נסה שוב מאוחר יותר', 'אישור', {
-          duration: 5 * 1000,
-        });
-      });
+      }
     })
   }
 }
