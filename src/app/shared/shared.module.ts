@@ -11,12 +11,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -38,6 +39,8 @@ import { FormsModule } from '@angular/forms';
     MatChipsModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
+    ReactiveFormsModule,
   ],
   exports: [
     FormsModule,
@@ -56,6 +59,8 @@ import { FormsModule } from '@angular/forms';
     MatChipsModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

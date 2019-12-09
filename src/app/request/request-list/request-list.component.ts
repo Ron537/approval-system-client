@@ -12,6 +12,8 @@ import { MatSnackBar } from '@angular/material';
 export class RequestListComponent implements OnInit {
 
   @Input() requests: IRequest[];
+  @Input() approvable: boolean;
+
   statuses: string[] = Object.keys(RequestStatus);
 
   constructor(private requestService: RequestService, private snackBar: MatSnackBar) { }

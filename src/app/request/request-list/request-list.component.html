@@ -1,6 +1,6 @@
 <div *ngIf="requests && requests.length; else noRequests">
     <mat-accordion class="headers-align">
-        <mat-expansion-panel *ngFor="let request of requests" hideToggle>
+        <mat-expansion-panel hideToggle *ngFor="let request of requests">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     {{request.id}} {{request.from}}
@@ -16,6 +16,24 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
             <div>
+                <mat-horizontal-stepper #stepper *ngIf="request.workflow">
+                    <mat-step *ngFor="let task of request.workflow">
+                        <ng-template matStepLabel>{{task.type === 'REGULAR' ? 'אישור' : 'אישור מיוחד'}}</ng-template>
+                        <div class="row">
+                            <dl [ngSwitch]="task.status">
+                                <dt>סטטוס</dt>
+                                <dd *ngSwitchCase="'APPROVED'">מאושר</dd>
+                                <dd *ngSwitchCase="'DENIED'">נדחה</dd>
+                                <dd *ngSwitchCase="'PENDING'">ממתין לאישור</dd>
+                                <dd *ngSwitchCase="'WAITING_FOR_INFO'">ממתין לפרטים נוספים</dd>
+                            </dl>
+                            <dl *ngIf="task.updatedAt">
+                                <dt>תאריך אישור</dt>
+                                <dd>{{task.updatedAt | date: 'dd/MM/yyyy hh:mm'}}</dd>
+                            </dl>
+                        </div>
+                    </mat-step>
+                </mat-horizontal-stepper>
                 <dl *ngIf="request.info">
                     <dt>תיאור הבקשה</dt>
                     <dd>{{request.info}}</dd>
@@ -29,7 +47,7 @@
                     </dd>
                 </dl>
             </div>
-            <mat-action-row align="end" *ngIf="request.status !== 'APPROVED' && request.status !== 'DENIED'">
+            <mat-action-row align="end" *ngIf="approvable && request.status !== 'APPROVED' && request.status !== 'DENIED'">
                 <button mat-button (click)="approveRequest(request.id)" color="primary">אשר</button>
                 <button mat-button (click)="denyRequest(request.id)" color="warn">דחה</button>
                 <button mat-button>פרטים נוספים</button>

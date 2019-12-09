@@ -4,10 +4,16 @@
 }
 
 .headers-align .mat-expansion-panel-header-description {
-    justify-content: space-between;
+  justify-content: space-between;
   align-items: center;
 }
 
 .center {
   margin: auto;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
