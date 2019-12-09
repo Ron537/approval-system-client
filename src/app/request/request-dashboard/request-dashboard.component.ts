@@ -12,14 +12,17 @@ import { ActivatedRoute } from "@angular/router";
 export class RequestDashboardComponent implements OnInit {
 
   requests$: Observable<IRequest[]>;
+  approvable: boolean;
 
   constructor(private requestService: RequestService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.url.subscribe(params => {
       if(params[0].path === 'approvable') {
+        this.approvable = true;
         this.requests$ = this.requestService.getApprovableRequests();
       } else {
+        this.approvable = false;
         this.requests$ = this.requestService.getMyRequests();
       }
     });
