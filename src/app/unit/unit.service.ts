@@ -23,4 +23,10 @@ export class UnitService {
       ranks
     });
   }
+
+  setSpecialApprovers(unitId, approversId: string[]) {
+    return this.http.patch(`/api/v1/unit/${unitId}/approvers/special`, {
+      specialApprovers: approversId
+    })
+  }
 }

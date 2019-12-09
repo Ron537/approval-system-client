@@ -4,13 +4,17 @@ import { UnitDashboardComponent } from './unit-dashboard/unit-dashboard.componen
 import { UnitListComponent } from './unit-list/unit-list.component';
 import { UnitRoutingModule } from './unit-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { UnitApproversDialogComponent } from './unit-approvers-dialog/unit-approvers-dialog.component';
 
 @NgModule({
-  declarations: [UnitDashboardComponent, UnitListComponent],
+  declarations: [UnitDashboardComponent, UnitListComponent, UnitApproversDialogComponent],
   imports: [
     CommonModule,
     UnitRoutingModule,
     SharedModule,
+  ],
+  entryComponents: [
+    UnitApproversDialogComponent
   ]
 })
 export class UnitModule { }

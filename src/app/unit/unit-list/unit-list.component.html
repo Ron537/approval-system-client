@@ -1,7 +1,8 @@
 <mat-card>
     <mat-list role="list">
         <mat-list-item *ngFor="let unit of units">
-            <h4 mat-line>{{unit.name}}</h4>
+            <span class="spacer">{{unit.name}}</span>
+            <button class="dialog-btn" mat-stroked-button color="primary" (click)="openUsersDialog(unit.id)">מאשרים נוספים</button>
             <mat-form-field>
                 <mat-label>דרגות מאשרות</mat-label>
                 <mat-select multiple (selectionChange)="ranksChanged($event, unit.id)" [(ngModel)]="unit.approvers">

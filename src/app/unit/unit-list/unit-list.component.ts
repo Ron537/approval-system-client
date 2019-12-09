@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IUnit } from '../unit.interface';
-import { MatSelectChange, MatSnackBar } from '@angular/material';
+import { MatSelectChange, MatSnackBar, MatDialog } from '@angular/material';
 import { UnitService } from '../unit.service';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { UnitApproversDialogComponent } from '../unit-approvers-dialog/unit-approvers-dialog.component';
 
 @Component({
   selector: 'app-unit-list',
@@ -16,7 +17,7 @@ export class UnitListComponent implements OnInit {
   @Input() ranks: string[];
   ranksSubject: Subject<{ id: string, ranks: [] }>;
 
-  constructor(private unitService: UnitService, private snackBar: MatSnackBar) {
+  constructor(private unitService: UnitService, private snackBar: MatSnackBar, private dialog: MatDialog) {
     this.ranksSubject = new Subject();
   }
 
@@ -39,5 +40,25 @@ export class UnitListComponent implements OnInit {
 
   ranksChanged(event: MatSelectChange, unitId: string) {
     this.ranksSubject.next({ id: unitId, ranks: event.value });
+  }
+
+  openUsersDialog(unitId: string) {
+    const dialogRef = this.dialog.open(UnitApproversDialogComponent, {
+      data: {
+        id: unitId
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((users: { id: string, name: string }[]) => {
+      this.unitService.setSpecialApprovers(unitId, users.map(usr => usr.id)).subscribe(() => {
+        this.snackBar.open('משתמשים נוספו בהצלחה', 'אישור', {
+          duration: 3 * 1000,
+        });
+      }, () => {
+        this.snackBar.open('הוספת משתמשים נכשל. נסה שוב מאוחר יותר', 'אישור', {
+          duration: 5 * 1000,
+        });
+      });
+    })
   }
 }
