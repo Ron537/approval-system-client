@@ -16,44 +16,38 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
             <div>
-                <mat-horizontal-stepper #stepper *ngIf="request.workflow">
-                    <mat-step *ngFor="let task of request.workflow">
-                        <ng-template matStepLabel>{{task.type === 'REGULAR' ? 'אישור' : 'אישור מיוחד'}}</ng-template>
-                        <div class="row">
-                            <dl [ngSwitch]="task.status">
-                                <dt>סטטוס</dt>
-                                <dd *ngSwitchCase="'APPROVED'">מאושר</dd>
-                                <dd *ngSwitchCase="'DENIED'">נדחה</dd>
-                                <dd *ngSwitchCase="'PENDING'">ממתין לאישור</dd>
-                                <dd *ngSwitchCase="'WAITING_FOR_INFO'">ממתין לפרטים נוספים</dd>
-                            </dl>
-                            <dl *ngIf="task.updatedAt">
-                                <dt>תאריך אישור</dt>
-                                <dd>{{task.updatedAt | date: 'dd/MM/yyyy hh:mm'}}</dd>
-                            </dl>
-                        </div>
-                    </mat-step>
-                </mat-horizontal-stepper>
                 <div class="row">
-                <dl *ngIf="request.info">
-                    <dt>תיאור הבקשה</dt>
-                    <dd>{{request.info}}</dd>
-                </dl>
-                <dl *ngIf="request.additionalInfo">
-                    <dt>דרושים פרטים נוספים</dt>
-                    <dd>{{request.additionalInfo}}</dd>
-                </dl>
+                    <dl *ngIf="request.info">
+                        <dt>תיאור הבקשה</dt>
+                        <dd>{{request.info}}</dd>
+                    </dl>
+                </div>
+                <div class="row">
+                    <dl *ngIf="request.additionalInfo">
+                        <dt>דרושים פרטים נוספים</dt>
+                        <dd>{{request.additionalInfo}}</dd>
+                    </dl>
+                    <dl *ngFor="let task of request.workflow" [ngSwitch]="task.status">
+                        <dt>{{task.type === 'REGULAR' ? 'סטטוס בקשה' : 'סטטוס אישור מיוחד'}}</dt>
+                        <dd *ngSwitchCase="'APPROVED'">מאושר</dd>
+                        <dd *ngSwitchCase="'DENIED'">נדחה</dd>
+                        <dd *ngSwitchCase="'PENDING'">ממתין לאישור</dd>
+                        <dd *ngSwitchCase="'WAITING_FOR_INFO'">ממתין לפרטים נוספים</dd>
+                    </dl>
+                </div>
+                <div class="row" *ngIf="request.to && request.to.length">
+                    <dl >
+                        <dt>עבור</dt>
+                        <dd>
+                            <mat-chip-list>
+                                <mat-chip *ngFor="let user of request.to">{{user.name}}</mat-chip>
+                            </mat-chip-list>
+                        </dd>
+                    </dl>
+                </div>
             </div>
-                <dl *ngIf="request.to && request.to.length">
-                    <dt>עבור</dt>
-                    <dd>
-                        <mat-chip-list>
-                            <mat-chip *ngFor="let user of request.to">{{user.name}}</mat-chip>
-                        </mat-chip-list>
-                    </dd>
-                </dl>
-            </div>
-            <mat-action-row align="end" *ngIf="approvable && request.status !== 'APPROVED' && request.status !== 'DENIED'">
+            <mat-action-row align="end"
+                *ngIf="approvable && request.status !== 'APPROVED' && request.status !== 'DENIED'">
                 <button mat-button (click)="requestAdditionalData(request.id)">פרטים נוספים</button>
                 <button mat-button (click)="approveRequest(request.id)" color="primary">אשר</button>
                 <button mat-button (click)="denyRequest(request.id)" color="warn">דחה</button>

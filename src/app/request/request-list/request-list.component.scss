@@ -15,5 +15,10 @@
 .row {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+
+dl {
+  margin: 0 16px;
 }
