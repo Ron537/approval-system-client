@@ -1,1 +1,2 @@
+<app-search-box (onSearch)="keydown$.next($event)"></app-search-box>
 <app-request-list [requests]="requests$ | async" [approvable]="approvable"></app-request-list>

@@ -10,12 +10,20 @@ export class RequestService {
 
   constructor(private http: HttpClient) { }
 
-  getApprovableRequests() {
-    return this.http.get<IRequest[]>('/api/v1/request/approvable');
+  getApprovableRequests(search?: string) {
+    return this.http.get<IRequest[]>('/api/v1/request/approvable', {
+      params: {
+        search: search ? search.trim() : ''
+      }
+    });
   }
 
-  getMyRequests() {
-    return this.http.get<IRequest[]>('/api/v1/request/my');
+  getMyRequests(search?: string) {
+    return this.http.get<IRequest[]>('/api/v1/request/my', {
+      params: {
+        search: search ? search.trim() : ''
+      }
+    });
   }
 
   changeRequestStatus(requestId: string, status: RequestStatus, additionalInfo?: string) {

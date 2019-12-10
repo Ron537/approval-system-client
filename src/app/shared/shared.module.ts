@@ -17,10 +17,11 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchBoxComponent } from './search-box/search-box.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [SearchBoxComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -60,7 +61,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatAutocompleteModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SearchBoxComponent
   ]
 })
 export class SharedModule { }
