@@ -10,7 +10,11 @@ const routes: Routes = [
   {
     path: 'unit',
     loadChildren: './unit/unit.module#UnitModule',
-  }
+  },
+  { path: '',
+    redirectTo: '/request/my',
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({
