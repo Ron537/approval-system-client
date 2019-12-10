@@ -34,10 +34,16 @@
                         </div>
                     </mat-step>
                 </mat-horizontal-stepper>
+                <div class="row">
                 <dl *ngIf="request.info">
                     <dt>תיאור הבקשה</dt>
                     <dd>{{request.info}}</dd>
                 </dl>
+                <dl *ngIf="request.additionalInfo">
+                    <dt>דרושים פרטים נוספים</dt>
+                    <dd>{{request.additionalInfo}}</dd>
+                </dl>
+            </div>
                 <dl *ngIf="request.to && request.to.length">
                     <dt>עבור</dt>
                     <dd>

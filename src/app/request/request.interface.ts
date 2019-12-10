@@ -7,4 +7,5 @@ export interface IRequest {
     info?: string;
     createdAt: Date;
     classification: string;
+    additionalInfo?: string;
 }
